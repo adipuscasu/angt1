@@ -22,7 +22,7 @@ var FirmaSchema = new Schema({
 	},
         cod_fiscal: {
 		type: String,
-		default: '',
+		default: 'RO',
 		trim: true,
 		required: 'Codul de identificare fiscala este obligatoriu'
 	},
