@@ -26,6 +26,11 @@ var FirmaSchema = new Schema({
 		trim: true,
 		required: 'Codul de identificare fiscala este obligatoriu'
 	},
+        nr_reg_com: {
+		type: String,
+		default: '',
+		trim: true
+	},
 	content: {
 		type: String,
 		default: '',
