@@ -79,7 +79,7 @@ exports.list = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.json(firmas);
+			res.json(firme);
 		}
 	});
 };
