@@ -11,15 +11,15 @@ angular.module('firme').config(['$stateProvider',
 		}).
 		state('createFirme', {
 			url: '/firme/create',
-			templateUrl: 'modules/firme/views/create-article.client.view.html'
+			templateUrl: 'modules/firme/views/create-firma.client.view.html'
 		}).
 		state('viewFirme', {
-			url: '/firme/:articleId',
-			templateUrl: 'modules/firme/views/view-article.client.view.html'
+			url: '/firme/:firmaId',
+			templateUrl: 'modules/firme/views/view-firma.client.view.html'
 		}).
 		state('editFirme', {
-			url: '/firme/:articleId/edit',
-			templateUrl: 'modules/firme/views/edit-article.client.view.html'
+			url: '/firme/:firmaId/edit',
+			templateUrl: 'modules/firme/views/edit-firma.client.view.html'
 		});
 	}
 ]);
