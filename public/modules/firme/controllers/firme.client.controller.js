@@ -7,13 +7,15 @@ angular.module('firme').controller('FirmeController', ['$scope', '$stateParams',
 		$scope.create = function() {
 			var firma = new Firme({
 				title: this.title,
-				content: this.content
+				content: this.content,
+                                cod_fiscal: this.cod_fiscal
 			});
 			firma.$save(function(response) {
 				$location.path('firme/' + response._id);
 
 				$scope.title = '';
 				$scope.content = '';
+                                $scope.cod_fiscal = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
