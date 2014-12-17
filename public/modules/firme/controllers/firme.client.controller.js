@@ -49,12 +49,14 @@ angular.module('firme').controller('FirmeController', ['$scope', '$stateParams',
 
 		$scope.find = function() {
 			$scope.firme = Firme.query();
+			console.log($scope.firme);
 		};
 
 		$scope.findOne = function() {
 			$scope.firma = Firme.get({
 				firmaId: $stateParams.firmaId
 			});
+			console.log($scope.firma);
 		};
 	}
 ]);
