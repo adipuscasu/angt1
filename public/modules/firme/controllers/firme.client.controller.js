@@ -8,14 +8,14 @@ angular.module('firme').controller('FirmeController', ['$scope', '$stateParams',
 			var firma = new Firme({
 				title: this.title,
 				content: this.content,
-                                cod_fiscal: this.cod_fiscal
+				cod_fiscal: this.cod_fiscal
 			});
 			firma.$save(function(response) {
 				$location.path('firme/' + response._id);
 
 				$scope.title = '';
 				$scope.content = '';
-                                $scope.cod_fiscal = '';
+				$scope.cod_fiscal = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -49,14 +49,12 @@ angular.module('firme').controller('FirmeController', ['$scope', '$stateParams',
 
 		$scope.find = function() {
 			$scope.firme = Firme.query();
-			console.log($scope.firme);
 		};
 
 		$scope.findOne = function() {
 			$scope.firma = Firme.get({
 				firmaId: $stateParams.firmaId
 			});
-			console.log($scope.firma);
 		};
 	}
 ]);
