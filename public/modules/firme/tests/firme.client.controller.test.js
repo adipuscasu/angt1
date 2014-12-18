@@ -57,18 +57,18 @@
 				content: 'MEAN rocks!'
 			});
 
-			// Create a sample firmas array that includes the new firma
+			// Create a sample firme array that includes the new firma
 			var sampleFirme = [sampleFirma];
 
 			// Set GET response
-			$httpBackend.expectGET('firmas').respond(sampleFirme);
+			$httpBackend.expectGET('firme').respond(sampleFirme);
 
 			// Run controller functionality
 			scope.find();
 			$httpBackend.flush();
 
 			// Test scope value
-			expect(scope.firmas).toEqualData(sampleFirme);
+			expect(scope.firme).toEqualData(sampleFirme);
 		}));
 
 		it('$scope.findOne() should create an array with one firma object fetched from XHR using a firmaId URL parameter', inject(function(Firme) {
@@ -79,10 +79,10 @@
 			});
 
 			// Set the URL parameter
-			$stateParams.firmaId = '525a8422f6d0f87f0e407a33';
+			$stateParams.firmaId = '525a8422f6d0f87f0e407a45';
 
 			// Set GET response
-			$httpBackend.expectGET(/firmas\/([0-9a-fA-F]{24})$/).respond(sampleFirma);
+			$httpBackend.expectGET(/firme\/([0-9a-fA-F]{24})$/).respond(sampleFirma);
 
 			// Run controller functionality
 			scope.findOne();
@@ -95,14 +95,14 @@
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Firme) {
 			// Create a sample firma object
 			var sampleFirmaPostData = new Firme({
-				title: 'An Firma about MEAN',
+				title: 'A Firma about MEAN',
 				content: 'MEAN rocks!'
 			});
 
 			// Create a sample firma response
 			var sampleFirmaResponse = new Firme({
-				_id: '525cf20451979dea2c000001',
-				title: 'An Firma about MEAN',
+				_id: '525cf20451979dea2c000023',
+				title: 'A Firma about MEAN',
 				content: 'MEAN rocks!'
 			});
 
@@ -111,7 +111,7 @@
 			scope.content = 'MEAN rocks!';
 
 			// Set POST response
-			$httpBackend.expectPOST('firmas', sampleFirmaPostData).respond(sampleFirmaResponse);
+			$httpBackend.expectPOST('firme', sampleFirmaPostData).respond(sampleFirmaResponse);
 
 			// Run controller functionality
 			scope.create();
@@ -122,7 +122,7 @@
 			expect(scope.content).toEqual('');
 
 			// Test URL redirection after the firma was created
-			expect($location.path()).toBe('/firmas/' + sampleFirmaResponse._id);
+			expect($location.path()).toBe('/firme/' + sampleFirmaResponse._id);
 		}));
 
 		it('$scope.update() should update a valid firma', inject(function(Firme) {
@@ -137,34 +137,34 @@
 			scope.firma = sampleFirmaPutData;
 
 			// Set PUT response
-			$httpBackend.expectPUT(/firmas\/([0-9a-fA-F]{24})$/).respond();
+			$httpBackend.expectPUT(/firme\/([0-9a-fA-F]{24})$/).respond();
 
 			// Run controller functionality
 			scope.update();
 			$httpBackend.flush();
 
 			// Test URL location to new object
-			expect($location.path()).toBe('/firmas/' + sampleFirmaPutData._id);
+			expect($location.path()).toBe('/firme/' + sampleFirmaPutData._id);
 		}));
 
 		it('$scope.remove() should send a DELETE request with a valid firmaId and remove the firma from the scope', inject(function(Firme) {
 			// Create new firma object
 			var sampleFirma = new Firme({
-				_id: '525a8422f6d0f87f0e407a33'
+				_id: '525a8422f6d0f87f0e407a65'
 			});
 
-			// Create new firmas array and include the firma
-			scope.firmas = [sampleFirma];
+			// Create new firme array and include the firma
+			scope.firme = [sampleFirma];
 
 			// Set expected DELETE response
-			$httpBackend.expectDELETE(/firmas\/([0-9a-fA-F]{24})$/).respond(204);
+			$httpBackend.expectDELETE(/firme\/([0-9a-fA-F]{24})$/).respond(204);
 
 			// Run controller functionality
 			scope.remove(sampleFirma);
 			$httpBackend.flush();
 
 			// Test array after successful delete
-			expect(scope.firmas.length).toBe(0);
+			expect(scope.firme.length).toBe(0);
 		}));
 	});
 }());
