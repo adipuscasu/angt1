@@ -3,39 +3,39 @@
 		<h1>Adaugare utilizator</h1>
 	</div>
 	<div class="col-md-12">
-		<form name="userForm" class="form-horizontal" data-ng-submit="adauga()" novalidate>
+		<form name="userForm" class="form-horizontal" data-ng-submit="create()">
 			<fieldset>
-				<div class="form-group" ng-class="{ 'has-error': userForm.title.$dirty && userForm.title.$invalid }">
+				<div class="form-group" ng-class="{ 'has-error': userForm.firstName.$dirty && userForm.firstName.$invalid }">
 					<label class="control-label" for="firstName">Nume utilizator</label>
 					<div class="controls">
 						<input name="firstName" type="text" data-ng-model="firstName" id="firstName" class="form-control" placeholder="Tastati numele utilizatorului." required>
 					</div>
 				</div>
-				<div class="form-group" ng-class="{ 'has-error': userForm.title.$dirty && userForm.title.$invalid }">
+				<div class="form-group" ng-class="{ 'has-error': userForm.lastName.$dirty && userForm.lastName.$invalid }">
 					<label class="control-label" for="lastName">Prenume utilizator</label>
 					<div class="controls">
 						<input name="lastName" type="text" data-ng-model="lastName" id="lastName" class="form-control" placeholder="Tastati prenumele utilizatorului." required>
 					</div>
 				</div>
-				<div class="form-group" ng-class="{ 'has-error': userForm.title.$dirty && userForm.title.$invalid }">
+				<div class="form-group" ng-class="{ 'has-error': userForm.displayName.$dirty && userForm.displayName.$invalid }">
 					<label class="control-label" for="displayName">Nume afisat utilizator</label>
 					<div class="controls">
 						<input name="displayName" type="text" data-ng-model="displayName" id="displayName" class="form-control" placeholder="Tastati numele afisat al utilizatorului." required>
 					</div>
 				</div>
-				<div class="form-group" ng-class="{ 'has-error': userForm.title.$dirty && userForm.title.$invalid }">
+				<div class="form-group" ng-class="{ 'has-error': userForm.email.$dirty && userForm.email.$invalid }">
 					<label class="control-label" for="email">Email utilizator</label>
 					<div class="controls">
-						<input name="email" type="text" data-ng-model="email" id="email" class="form-control" placeholder="Tastati email-ul utilizatorului." required>
+						<input name="email" type="email" data-ng-model="email" id="email" class="form-control" placeholder="Tastati email-ul utilizatorului." required>
 					</div>
 				</div>
-				<div class="form-group" ng-class="{ 'has-error': userForm.title.$dirty && userForm.title.$invalid }">
+				<div class="form-group" ng-class="{ 'has-error': userForm.username.$dirty && userForm.username.$invalid }">
 					<label class="control-label" for="username">Numele de autentificare al utilizatorului</label>
 					<div class="controls">
 						<input name="username" type="text" data-ng-model="username" id="username" class="form-control" placeholder="Tastati numele de autentificare al utilizatorului." required>
 					</div>
 				</div>
-				<div class="form-group" ng-class="{ 'has-error': userForm.title.$dirty && userForm.title.$invalid }">
+				<div class="form-group" ng-class="{ 'has-error': userForm.password.$dirty && userForm.password.$invalid }">
 					<label class="control-label" for="password">Parola utilizatorului</label>
 					<div class="controls">
 						<input name="password" type="password" data-ng-model="password" id="password" class="form-control" placeholder="Tastati parola de autentificare a utilizatorului." required>

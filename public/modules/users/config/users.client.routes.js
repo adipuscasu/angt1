@@ -5,7 +5,7 @@ angular.module('users').config(['$stateProvider',
 	function($stateProvider) {
 		// Users state routing
 		$stateProvider.
-		state('addUsers', {
+		state('createUsers', {
 			url: '/users/add',
 			templateUrl: 'modules/users/views/add-users.client.view.html'
 		}).

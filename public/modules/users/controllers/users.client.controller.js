@@ -4,17 +4,18 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, Authentication, Users) {
 		$scope.authentication = Authentication;
 
-		$scope.adauga = function() {
+		$scope.create = function() {
 			var user = new Users({
 				firstName: this.firstName,
 				lastName: this.lastName,
 				displayName: this.displayName,
 				email: this.email,
+				provider: 'local',
 				username: this.username,
 				password: this.password
 			});
 			user.$save(function(response) {
-				$location.path('users/add' + response._id);
+				$location.path('users/' + response._id);
 
 				$scope.firstName = '';
 				$scope.lastName = '';
@@ -24,9 +25,10 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				$scope.password = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
+				
 			});
 		};
-
+	
 		$scope.remove = function(user) {
 			if (user) {
 				user.$remove();
