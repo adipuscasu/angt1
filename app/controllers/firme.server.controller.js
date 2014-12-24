@@ -71,7 +71,7 @@ exports.delete = function(req, res) {
 };
 
 //
-// List of Firmas
+// List of Firme
 //
 exports.list = function(req, res) {
 	Firma.find().sort('-created').populate('user', 'displayName').exec(function(err, firme) {
