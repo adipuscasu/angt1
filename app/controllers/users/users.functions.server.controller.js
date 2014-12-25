@@ -1,5 +1,8 @@
+'use strict';
+
 var User = require('mongoose').model('User');
 
+//create controller
 exports.create = function(req, res, next) {
  var user = new User(req.body);
  user.save(function(err) {
