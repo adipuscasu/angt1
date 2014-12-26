@@ -16,6 +16,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				$location.path('/');
 			}).error(function(response) {
 				$scope.error = response.message;
+				console.log("eroare "+$scope.error);
 			});
 		};
 
