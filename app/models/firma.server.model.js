@@ -9,6 +9,15 @@ var mongoose = require('mongoose'),
 /**
  * Firma Schema
  */
+
+/**
+ * A Validation function for local strategy properties
+ */
+var validateLocalStrategyProperty = function(property) {
+	return (property.length>2);
+};
+
+
 var FirmaSchema = new Schema({
 	created: {
 		type: Date,
@@ -18,7 +27,8 @@ var FirmaSchema = new Schema({
 		type: String,
 		default: '',
 		trim: true,
-		required: 'Title cannot be blank'
+		required: 'Numele firmei nu poate fi vid !',
+		validate: [validateLocalStrategyProperty, 'Numele firmei este prea scurt !']
 	},
         cod_fiscal: {
 		type: String,
