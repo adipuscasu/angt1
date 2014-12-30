@@ -9,10 +9,6 @@ angular.module('firme').config(['$stateProvider',
 			url: '/firme-selectate',
 			templateUrl: 'modules/firme/views/firme-selectate.client.view.html'
 		}).
-		state('firme-selectate', {
-			url: '/firme-selectate',
-			templateUrl: 'modules/firme/views/firme-selectate.client.view.html'
-		}).
 		state('listFirme', {
 			url: '/firme',
 			templateUrl: 'modules/firme/views/list-firme.client.view.html'

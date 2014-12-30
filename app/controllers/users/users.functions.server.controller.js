@@ -20,7 +20,7 @@ exports.create = function(req, res, next) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.json(firma);
+			res.json(user);
 		}
 	});
 };

@@ -23,7 +23,7 @@ angular.module('users').controller('UsersAddController', ['$scope', '$stateParam
 				$scope.password = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
-				console.log("eroare: %j",$scope.error);
+				console.log('eroare: %j',$scope.error);
 			});
 		};
 	

@@ -43,10 +43,6 @@ angular.element(document).ready(function() {
 });
 'use strict';
 
-// Use Application configuration module to register a new module
-ApplicationConfiguration.registerModule('articles');
-'use strict';
-
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('core');
 'use strict';
@@ -56,116 +52,8 @@ ApplicationConfiguration.registerModule('firme');
 
 'use strict';
 
-// Use Applicaion configuration module to register a new module
+// Use Application configuration module to register a new module
 ApplicationConfiguration.registerModule('users');
-'use strict';
-
-// Configuring the Articles module
-angular.module('articles').run(['Menus',
-	function(Menus) {
-		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'Articles', 'articles', 'dropdown', '/articles(/create)?');
-		Menus.addSubMenuItem('topbar', 'articles', 'List Articles', 'articles');
-		Menus.addSubMenuItem('topbar', 'articles', 'New Article', 'articles/create');
-	}
-]);
-'use strict';
-
-// Setting up route
-angular.module('articles').config(['$stateProvider',
-	function($stateProvider) {
-		// Articles state routing
-		$stateProvider.
-		state('listArticles', {
-			url: '/articles',
-			templateUrl: 'modules/articles/views/list-articles.client.view.html'
-		}).
-		state('createArticle', {
-			url: '/articles/create',
-			templateUrl: 'modules/articles/views/create-article.client.view.html'
-		}).
-		state('viewArticle', {
-			url: '/articles/:articleId',
-			templateUrl: 'modules/articles/views/view-article.client.view.html'
-		}).
-		state('editArticle', {
-			url: '/articles/:articleId/edit',
-			templateUrl: 'modules/articles/views/edit-article.client.view.html'
-		});
-	}
-]);
-'use strict';
-
-angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
-	function($scope, $stateParams, $location, Authentication, Articles) {
-		$scope.authentication = Authentication;
-
-		$scope.create = function() {
-			var article = new Articles({
-				title: this.title,
-				content: this.content
-			});
-			article.$save(function(response) {
-				$location.path('articles/' + response._id);
-
-				$scope.title = '';
-				$scope.content = '';
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
-
-		$scope.remove = function(article) {
-			if (article) {
-				article.$remove();
-
-				for (var i in $scope.articles) {
-					if ($scope.articles[i] === article) {
-						$scope.articles.splice(i, 1);
-					}
-				}
-			} else {
-				$scope.article.$remove(function() {
-					$location.path('articles');
-				});
-			}
-		};
-
-		$scope.update = function() {
-			var article = $scope.article;
-
-			article.$update(function() {
-				$location.path('articles/' + article._id);
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
-
-		$scope.find = function() {
-			$scope.articles = Articles.query();
-		};
-
-		$scope.findOne = function() {
-			$scope.article = Articles.get({
-				articleId: $stateParams.articleId
-			});
-		};
-	}
-]);
-'use strict';
-
-//Articles service used for communicating with the articles REST endpoints
-angular.module('articles').factory('Articles', ['$resource',
-	function($resource) {
-		return $resource('articles/:articleId', {
-			articleId: '@_id'
-		}, {
-			update: {
-				method: 'PUT'
-			}
-		});
-	}
-]);
 'use strict';
 
 // Setting up route
@@ -178,7 +66,8 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		$stateProvider.
 		state('home', {
 			url: '/',
-			templateUrl: 'modules/core/views/home.client.view.html'
+			//templateUrl: 'modules/core/views/home.client.view.html'
+			templateUrl: 'modules/firme/views/list-firme.client.view.html'
 		});
 	}
 ]);
@@ -377,7 +266,7 @@ angular.module('core').service('Menus', [
 ]);
 'use strict';
 
-// Configuring the Articles module
+// Configuring the Firme module
 angular.module('firme').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
@@ -409,16 +298,17 @@ angular.module('firme').config(['$stateProvider',
 			url: '/firme/create',
 			templateUrl: 'modules/firme/views/create-firma.client.view.html'
 		}).
-		state('viewFirme', {
+		state('viewFirma', {
 			url: '/firme/:firmaId',
 			templateUrl: 'modules/firme/views/view-firma.client.view.html'
 		}).
-		state('editFirme', {
+		state('editFirma', {
 			url: '/firme/:firmaId/edit',
 			templateUrl: 'modules/firme/views/edit-firma.client.view.html'
 		});
 	}
 ]);
+
 'use strict';
 
 angular.module('firme').controller('FirmeSelectateController', ['$scope',
@@ -437,14 +327,14 @@ angular.module('firme').controller('FirmeController', ['$scope', '$stateParams',
 			var firma = new Firme({
 				title: this.title,
 				content: this.content,
-                                cod_fiscal: this.cod_fiscal
+				cod_fiscal: this.cod_fiscal
 			});
 			firma.$save(function(response) {
 				$location.path('firme/' + response._id);
 
 				$scope.title = '';
 				$scope.content = '';
-                                $scope.cod_fiscal = '';
+				$scope.cod_fiscal = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -492,7 +382,7 @@ angular.module('firme').controller('FirmeController', ['$scope', '$stateParams',
 //Firme service used for communicating with the firme REST endpoints
 angular.module('firme').factory('Firme', ['$resource',
 	function($resource) {
-		return $resource('firme/:articleId', {
+		return $resource('firme/:firmaId', {
 			firmaId: '@_id'
 		}, {
 			update: {
@@ -503,6 +393,15 @@ angular.module('firme').factory('Firme', ['$resource',
 ]);
 'use strict';
 
+// Adauga meniu pentru optiuni utilizatori
+angular.module('users').run(['Menus',
+                         	function(Menus) {
+                         		// Set top bar menu items
+                         		Menus.addMenuItem('topbar', 'Users', 'users', 'dropdown', '/users(/add)?');
+                         		Menus.addSubMenuItem('topbar', 'users', 'Lista utilizatori', 'users');
+                         		Menus.addSubMenuItem('topbar', 'users', 'Adauga utilizator', 'users/add');
+                         	}
+                         ]);
 // Config HTTP Error Handling
 angular.module('users').config(['$httpProvider',
 	function($httpProvider) {
@@ -538,6 +437,14 @@ angular.module('users').config(['$stateProvider',
 	function($stateProvider) {
 		// Users state routing
 		$stateProvider.
+		state('createUsers', {
+			url: '/users/add',
+			templateUrl: 'modules/users/views/add-users.client.view.html'
+		}).
+		state('listUsers', {
+			url: '/users',
+			templateUrl: 'modules/users/views/list-users.client.view.html'
+		}).
 		state('profile', {
 			url: '/settings/profile',
 			templateUrl: 'modules/users/views/settings/edit-profile.client.view.html'
@@ -594,6 +501,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				$location.path('/');
 			}).error(function(response) {
 				$scope.error = response.message;
+				console.log("eroare "+$scope.error);
 			});
 		};
 
@@ -721,6 +629,72 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 				$scope.passwordDetails = null;
 			}).error(function(response) {
 				$scope.error = response.message;
+			});
+		};
+	}
+]);
+'use strict';
+
+angular.module('users').controller('UsersAddController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users',
+ function($scope, $stateParams, $location, Authentication, Users) {
+  $scope.authentication = Authentication;
+		
+		$scope.create = function() {
+			var user = new Users({
+				firstName: this.firstName,
+				lastName: this.lastName,
+				email: this.email,
+				username: this.username,
+				password: this.password
+			});
+			user.$save(function(response) {
+				$location.path('users' + response._id);
+
+				$scope.firstName = '';
+				$scope.lastName = '';
+				$scope.displayName = '';
+				$scope.email = '';
+				$scope.username = '';
+				$scope.password = '';
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+				console.log("eroare: %j",$scope.error);
+			});
+		};
+	
+		$scope.remove = function(user) {
+			if (user) {
+				user.$remove();
+
+				for (var i in $scope.users) {
+					if ($scope.users[i] === user) {
+						$scope.users.splice(i, 1);
+					}
+				}
+			} else {
+				$scope.user.$remove(function() {
+					$location.path('users');
+				});
+			}
+		};
+
+		$scope.update = function() {
+			var user = $scope.user;
+
+			user.$update(function() {
+				$location.path('users/' + user._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		$scope.find = function() {
+			$scope.users = Users.query();
+		};
+
+		$scope.findOne = function() {
+			$scope.user = Users.get({
+				userId: $stateParams.userId
 			});
 		};
 	}
