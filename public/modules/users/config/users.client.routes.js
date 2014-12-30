@@ -10,7 +10,7 @@ angular.module('users').config(['$stateProvider',
 			templateUrl: 'modules/users/views/add-users.client.view.html'
 		}).
 		state('listUsers', {
-			url: '/users',
+			url: '/users/list',
 			templateUrl: 'modules/users/views/list-users.client.view.html'
 		}).
 		state('profile', {

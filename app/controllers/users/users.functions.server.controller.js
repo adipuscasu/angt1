@@ -24,7 +24,18 @@ exports.create = function(req, res, next) {
 		}
 	});
 };
-
+exports.list = function(req, res, next) {
+    User.find().sort('-created').populate('createdBy', 'displayName').exec(function(err, users) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(users);
+                        console('list : %j'+users);
+		}
+	});
+};
 exports.create2 = function(req, res) {
 	// For security measurement we remove the roles from the req.body object
 	delete req.body.roles;
