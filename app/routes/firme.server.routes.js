@@ -9,11 +9,11 @@ var users = require('../../app/controllers/users.server.controller'),
 module.exports = function(app) {
 	// Firme Routes
 	app.route('/firme')
-		.get(firme.list)
+		.get(users.requiresLogin, firme.list)
 		.post(users.requiresLogin, firme.create);
 
 	app.route('/firme/:firmaId')
-		.get(firme.read)
+		.get(users.requiresLogin, firme.read)
 		.put(users.requiresLogin, firme.hasAuthorization, firme.update)
 		.delete(users.requiresLogin, firme.hasAuthorization, firme.delete);
 
