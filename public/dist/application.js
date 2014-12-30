@@ -286,10 +286,6 @@ angular.module('firme').config(['$stateProvider',
 			url: '/firme-selectate',
 			templateUrl: 'modules/firme/views/firme-selectate.client.view.html'
 		}).
-		state('firme-selectate', {
-			url: '/firme-selectate',
-			templateUrl: 'modules/firme/views/firme-selectate.client.view.html'
-		}).
 		state('listFirme', {
 			url: '/firme',
 			templateUrl: 'modules/firme/views/list-firme.client.view.html'
@@ -442,7 +438,7 @@ angular.module('users').config(['$stateProvider',
 			templateUrl: 'modules/users/views/add-users.client.view.html'
 		}).
 		state('listUsers', {
-			url: '/users',
+			url: '/users/list',
 			templateUrl: 'modules/users/views/list-users.client.view.html'
 		}).
 		state('profile', {
@@ -501,7 +497,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				$location.path('/');
 			}).error(function(response) {
 				$scope.error = response.message;
-				console.log("eroare "+$scope.error);
+				console.log('eroare '+$scope.error);
 			});
 		};
 
@@ -635,7 +631,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 ]);
 'use strict';
 
-angular.module('users').controller('UsersAddController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users',
+angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users',
  function($scope, $stateParams, $location, Authentication, Users) {
   $scope.authentication = Authentication;
 		
@@ -658,7 +654,7 @@ angular.module('users').controller('UsersAddController', ['$scope', '$stateParam
 				$scope.password = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
-				console.log("eroare: %j",$scope.error);
+				console.log('eroare: %j',$scope.error);
 			});
 		};
 	
