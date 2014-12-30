@@ -393,6 +393,14 @@ angular.module('firme').config(['$stateProvider',
 	function($stateProvider) {
 		// Firme state routing
 		$stateProvider.
+		state('firme-selectate', {
+			url: '/firme-selectate',
+			templateUrl: 'modules/firme/views/firme-selectate.client.view.html'
+		}).
+		state('firme-selectate', {
+			url: '/firme-selectate',
+			templateUrl: 'modules/firme/views/firme-selectate.client.view.html'
+		}).
 		state('listFirme', {
 			url: '/firme',
 			templateUrl: 'modules/firme/views/list-firme.client.view.html'
@@ -413,6 +421,14 @@ angular.module('firme').config(['$stateProvider',
 ]);
 'use strict';
 
+angular.module('firme').controller('FirmeSelectateController', ['$scope',
+	function($scope) {
+		// Controller Logic
+		// ...
+	}
+]);
+'use strict';
+
 angular.module('firme').controller('FirmeController', ['$scope', '$stateParams', '$location', 'Authentication', 'Firme',
 	function($scope, $stateParams, $location, Authentication, Firme) {
 		$scope.authentication = Authentication;
@@ -420,13 +436,15 @@ angular.module('firme').controller('FirmeController', ['$scope', '$stateParams',
 		$scope.create = function() {
 			var firma = new Firme({
 				title: this.title,
-				content: this.content
+				content: this.content,
+                                cod_fiscal: this.cod_fiscal
 			});
 			firma.$save(function(response) {
 				$location.path('firme/' + response._id);
 
 				$scope.title = '';
 				$scope.content = '';
+                                $scope.cod_fiscal = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
