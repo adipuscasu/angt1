@@ -28,6 +28,10 @@ angular.module('users').config(['$httpProvider',
 							case 403:
 								// Add unauthorized behaviour 
 								break;
+							case 404:
+								// Add document not found
+								console.log('Eroare 404');
+								break;								
 						}
 
 						return $q.reject(rejection);

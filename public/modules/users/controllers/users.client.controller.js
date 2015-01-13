@@ -13,8 +13,9 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				password: this.password
 			});
 			user.$save(function(response) {
-				$location.path('users' + response._id);
-
+				$location.path('users/create' + response._id);
+				
+				console.log('client save');
 				$scope.firstName = '';
 				$scope.lastName = '';
 				$scope.displayName = '';
@@ -23,7 +24,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				$scope.password = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
-				console.log('eroare: %j',$scope.error);
+				//console.log('eroare: ',$scope.error);
 			});
 		};
 	
@@ -38,7 +39,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				}
 			} else {
 				$scope.user.$remove(function() {
-					$location.path('users');
+					$location.path('users/delete');
 				});
 			}
 		};
